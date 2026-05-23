@@ -53,6 +53,7 @@ public class StudentService : IStudentService
         if (!string.IsNullOrWhiteSpace(sort))
         {
             var sorts = sort.Split(',');
+            var isOrdered = false;
 
             foreach (var item in sorts)
             {
@@ -67,21 +68,41 @@ public class StudentService : IStudentService
                 query = field.ToLower() switch
                 {
                     "fullname" =>
-                        descending
-                            ? query.OrderByDescending(
-                                x => x.FullName)
-                            : query.OrderBy(
-                                x => x.FullName),
+                        isOrdered
+                            ? descending
+                                ? ((IOrderedQueryable<Student>)query)
+                                    .ThenByDescending(
+                                        x => x.FullName)
+                                : ((IOrderedQueryable<Student>)query)
+                                    .ThenBy(
+                                        x => x.FullName)
+                            : descending
+                                ? query.OrderByDescending(
+                                    x => x.FullName)
+                                : query.OrderBy(
+                                    x => x.FullName),
 
                     "dateofbirth" =>
-                        descending
-                            ? query.OrderByDescending(
-                                x => x.DateOfBirth)
-                            : query.OrderBy(
-                                x => x.DateOfBirth),
+                        isOrdered
+                            ? descending
+                                ? ((IOrderedQueryable<Student>)query)
+                                    .ThenByDescending(
+                                        x => x.DateOfBirth)
+                                : ((IOrderedQueryable<Student>)query)
+                                    .ThenBy(
+                                        x => x.DateOfBirth)
+                            : descending
+                                ? query.OrderByDescending(
+                                    x => x.DateOfBirth)
+                                : query.OrderBy(
+                                    x => x.DateOfBirth),
 
                     _ => query
                 };
+
+                isOrdered =
+                    isOrdered
+                    || query is IOrderedQueryable<Student>;
             }
         }
 

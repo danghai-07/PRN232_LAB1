@@ -29,6 +29,9 @@ public class CoursesController : ControllerBase
             int page = 1,
             int size = 10)
     {
+        size = Math.Clamp(size, 1, 100);
+        page = Math.Max(1, page);
+
         var result =
             await _courseService
                 .GetCoursesAsync(

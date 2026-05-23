@@ -24,6 +24,11 @@ public class GlobalExceptionMiddleware
         }
         catch (Exception ex)
         {
+            if (context.Response.HasStarted)
+            {
+                throw;
+            }
+
             context.Response.ContentType =
                 "application/json";
 

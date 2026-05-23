@@ -37,6 +37,7 @@ builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
+app.UseAuthentication();
 
 if (app.Environment.IsDevelopment())
 {
