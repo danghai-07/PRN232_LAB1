@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Implementations\" />
   </ItemGroup>
 
   <ItemGroup>

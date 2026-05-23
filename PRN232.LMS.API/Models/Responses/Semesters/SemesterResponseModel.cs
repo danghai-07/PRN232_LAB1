@@ -1,0 +1,14 @@
+namespace PRN232.LMS.API.Models.Responses.Semesters;
+
+public class SemesterResponseModel
+{
+    public int SemesterId { get; set; }
+
+    public string SemesterName { get; set; } = null!;
+
+    public DateTime StartDate { get; set; }
+
+    public DateTime EndDate { get; set; }
+
+    public object? Courses { get; set; }
+}
