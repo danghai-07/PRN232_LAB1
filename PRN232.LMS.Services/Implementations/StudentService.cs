@@ -102,7 +102,7 @@ public class StudentService : IStudentService
 
                 isOrdered =
                     isOrdered
-                    || query is IOrderedQueryable<Student>;
+                    || field.ToLower() is "fullname" or "dateofbirth";
             }
         }
 
